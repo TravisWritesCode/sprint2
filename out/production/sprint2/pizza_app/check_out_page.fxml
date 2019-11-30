@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="600.0" maxWidth="1000.0" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizza_app.CheckoutController">
+   <children>
+      <AnchorPane layoutX="63.0" layoutY="68.0" prefHeight="200.0" prefWidth="414.0" style="-fx-border-color: black; -fx-border-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);">
+         <children>
+            <JFXButton fx:id="addButton" layoutX="283.0" layoutY="161.0" onAction="#addItem" style="-fx-background-color: #5CB85B;" text="Add Pizza to Order" textFill="WHITE" />
+            <Text layoutX="23.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Build Your Pizza">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Line endX="54.66796875" endY="0.0234375" layoutX="137.0" layoutY="46.0" startX="-114.0" startY="0.0234375" stroke="#dc3545" strokeWidth="2.0" />
+            <JFXComboBox layoutX="23.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Size" />
+            <JFXComboBox layoutX="152.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Crust Type" />
+            <JFXComboBox layoutX="283.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Crust Type" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="650.0" layoutY="49.0" prefHeight="502.0" prefWidth="305.0" style="-fx-border-color: black; -fx-border-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);">
+         <children>
+            <TableView fx:id="orderTable" layoutX="15.0" layoutY="13.0" prefHeight="289.0" prefWidth="276.0">
+              <columns>
+                <TableColumn fx:id="itemColumn" minWidth="192.0" prefWidth="192.0" text="Item" />
+                <TableColumn fx:id="priceColumn" minWidth="75.0" prefWidth="83.0" text="Price" />
+              </columns>
+            </TableView>
+            <JFXButton layoutX="15.0" layoutY="311.0" onAction="#removeItem" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #DC3545;" text="Remove Item" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+            <JFXButton fx:id="submitOrder" layoutX="15.0" layoutY="450.0" onAction="#setTotals" prefHeight="38.0" prefWidth="276.0" style="-fx-background-color: #5CB85B;" text="Submit Order" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></JFXButton>
+            <GridPane layoutX="109.0" layoutY="311.0" prefHeight="126.0" prefWidth="182.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="89.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="93.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Subtotal:" textAlignment="RIGHT" />
+                  <Label text="Fees:" textAlignment="RIGHT" GridPane.rowIndex="1" />
+                  <Label text="Tax:" textAlignment="RIGHT" GridPane.rowIndex="2" />
+                  <JFXTextField fx:id="fees" focusColor="#4d4d4d" maxWidth="74.0" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="tax" focusColor="#4d4d4d" maxWidth="74.0" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXTextField fx:id="total" focusColor="#4d4d4d" maxWidth="74.0" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Total:" textAlignment="RIGHT" GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="subtotal" focusColor="#4d4d4d" maxWidth="74.0" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="NONE" />
+                     </cursor>
+                  </JFXTextField>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="63.0" layoutY="300.0" prefHeight="200.0" prefWidth="414.0" style="-fx-border-color: black; -fx-border-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);">
+         <children>
+            <JFXButton fx:id="addButton2" layoutX="283.0" layoutY="161.0" onAction="#addItem" style="-fx-background-color: #5CB85B;" text="Add Extras to Order" textFill="WHITE" />
+            <Text layoutX="23.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Extras">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Line endX="-1.65234375" endY="0.0234375" layoutX="137.0" layoutY="46.0" startX="-114.0" startY="0.0234375" stroke="#dc3545" strokeWidth="2.0" />
+            <JFXComboBox layoutX="23.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Size" />
+            <JFXComboBox layoutX="152.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Crust Type" />
+            <JFXComboBox layoutX="283.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Crust Type" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

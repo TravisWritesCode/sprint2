@@ -1,0 +1,40 @@
+#orderTable JFXButton {
+   -fx-background-color: #D8534F;
+   -fx-text-fill: white;
+}
+
+#summaryTable .column-header-background {
+    visibility: hidden; -fx-padding: -1em;
+    }
+
+.table-view: focused{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-color: transparent ,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-button,
+.table-view *.scroll-bar:horizontal *.decrement-button {
+  -fx-background-color: null;
+  -fx-background-radius: 0;
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-arrow,
+.table-view *.scroll-bar:horizontal *.decrement-arrow {
+  -fx-background-color: null;
+  -fx-background-radius: 0;
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+  -fx-shape: null;
+}
+
+.table-view{
+    -fx-font-family: "System";
+    -fx-font-size: 12px;
+}
