@@ -7,14 +7,20 @@ public class MenuItem {
     private String itemStringPrice;
     protected String colDisplay;
 
-
-
     public MenuItem(String itemName, String itemSize){
         this.itemName = itemName;
         this.itemSize = itemSize;
         this.itemStringPrice = "$"+ java.lang.String.format("%.2f", itemPrice);
         this.colDisplay = itemName + "; " + itemSize;
     }
+
+    public MenuItem(String itemName){
+        this.itemName = itemName;
+        this.itemStringPrice = "$"+ java.lang.String.format("%.2f", itemPrice);
+        this.colDisplay = itemName;
+    }
+
+    public MenuItem(){}
 
     public String getItemName() {
         return itemName;
@@ -56,7 +62,4 @@ public class MenuItem {
     public void setColDisplay(String colDisplay){
         this.colDisplay = colDisplay;
     }
-
-
-
 }

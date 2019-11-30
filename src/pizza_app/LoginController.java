@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import com.jfoenix.controls.JFXPasswordField;
 
-public class Controller {
+public class LoginController {
 
     @FXML
     private Pane root;

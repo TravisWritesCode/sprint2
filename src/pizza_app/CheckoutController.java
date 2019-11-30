@@ -6,10 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ArrayList;
@@ -92,6 +89,27 @@ public class CheckoutController implements Initializable {
     @FXML
     private JFXRadioButton pickup;
 
+    @FXML
+    private JFXComboBox flavors;
+
+    @FXML
+    private JFXCheckBox breadsticks;
+
+    @FXML
+    private JFXCheckBox breadstickBites;
+
+    @FXML
+    private JFXCheckBox cookie;
+
+    @FXML
+    private JFXRadioButton small;
+
+    @FXML
+    private JFXRadioButton medium;
+
+    @FXML
+    private JFXRadioButton large;
+
     //this is a list to contain the items in the order
     private ObservableList<MenuItem> menuItems = getItemList();
 
@@ -117,8 +135,24 @@ public class CheckoutController implements Initializable {
         crustType.add("Pan");
         type.setItems(crustType);
 
+        //drink flavor dropdown
+        final ArrayList<String> DRINKFLAVORS = new ArrayList<String>();
+        ObservableList<String> drinkFlavors = FXCollections.observableList(DRINKFLAVORS);
+        drinkFlavors.add("Pepsi");
+        drinkFlavors.add("Diet Pepsi");
+        drinkFlavors.add("Orange");
+        drinkFlavors.add("Diet Orange");
+        drinkFlavors.add("Root Beer");
+        drinkFlavors.add("Diet Root Beer");
+        drinkFlavors.add("Sierra Mist");
+        drinkFlavors.add("Lemonade");
+        flavors.setItems(drinkFlavors);
+
         //set pickup by default
         pickup.setSelected(true);
+
+        //set small by default
+        small.setSelected(true);
 
         //Set totals in order summary pane
         resetTotals();
@@ -132,6 +166,7 @@ public class CheckoutController implements Initializable {
         //define columns in order summary table
         itemColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("colDisplay"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("itemStringPrice"));
+        itemColumn.setCellFactory(TooltippedTableCell.forTableColumn());
         orderTable.setItems(menuItems);
 
         //Set delivery fee set to 0.00 in order summary box
@@ -146,19 +181,70 @@ public class CheckoutController implements Initializable {
     }
 
     // adds item to order
-/*    public void addMenuItem() {
-        if (size.getValue().toString().length() == 0 || type.getValue().toString().length() == 0){
+    public void addSide(ActionEvent e) {
+        if ( !breadsticks.isSelected() && !breadstickBites.isSelected() && !cookie.isSelected()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Oops. Invalid Entry.");
-            alert.setHeaderText("Both 'Price' and 'Item' must be filled in.");
+            alert.setHeaderText("No side items are selected.");
             alert.setContentText("Please try again.");
             alert.showAndWait();
         }
         else {
-            MenuItem item = new MenuItem (itemName.getValue().toString(), Double.parseDouble(price.getValue().toString()));
-            orderTable.getItems().add(order);
+            MenuItem side = new MenuItem();
+            if (breadsticks.isSelected()) {
+                side = new MenuItem ("Bread Sticks");
+                side.setItemPrice(2);
+                side.setItemStringPrice(side.getItemPrice());
+                orderTable.getItems().add(side);
+            }
+            if (breadstickBites.isSelected()){
+                side = new MenuItem ("Bread Stick Bites");
+                side.setItemPrice(2);
+                side.setItemStringPrice(side.getItemPrice());
+                orderTable.getItems().add(side);
+            }
+            if (cookie.isSelected()){
+                side = new MenuItem ("Big Chocolate Chip Cookie");
+                side.setItemPrice(4);
+                side.setItemStringPrice(side.getItemPrice());
+                orderTable.getItems().add(side);
+            }
         }
-    }*/
+        resetTotals();
+    }
+
+    // adds item to order
+    public void addDrink(ActionEvent e) {
+        if (flavors.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Oops. Invalid Entry.");
+            alert.setHeaderText("A flavor must be selected.");
+            alert.setContentText("Please try again.");
+            alert.showAndWait();
+        }
+        else {
+            MenuItem drink = new MenuItem();
+            if (small.isSelected()) {
+                drink = new MenuItem ("Small " + flavors.getValue().toString());
+                drink.setItemPrice(1);
+                drink.setItemStringPrice(drink.getItemPrice());
+                orderTable.getItems().add(drink);
+            }
+            if (medium.isSelected()){
+                drink = new MenuItem ("Medium " + flavors.getValue().toString());
+                drink.setItemPrice(1);
+                drink.setItemStringPrice(drink.getItemPrice());
+                orderTable.getItems().add(drink);
+            }
+            if (large.isSelected()){
+                drink = new MenuItem ("Medium " + flavors.getValue().toString());
+                drink.setItemPrice(1);
+                drink.setItemStringPrice(drink.getItemPrice());
+                orderTable.getItems().add(drink);
+            }
+        }
+        resetTotals();
+    }
 
     // adds pizza to order
     public void addPizza() {
@@ -186,45 +272,75 @@ public class CheckoutController implements Initializable {
                 pizza.incrementItemPrice(10);
             }
             if (pepperoni.isSelected()) {
-                pizza.incrementItemPrice(.25);
-                pizza.addTopping("Pepperoni");
+                if (pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Pepperoni +$0.25");
+                } else {
+                    pizza.addTopping("Pepperoni");
+                }
             }
             if (sausage.isSelected()){
-                pizza.incrementItemPrice(.25);
-                pizza.addTopping("Sausage");
+                if (pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Sausage +$0.25");
+                } else {
+                    pizza.addTopping("Sausage");
+                }
             }
             if (ham.isSelected()){
-                pizza.incrementItemPrice(.25);
-                pizza.addTopping("Ham");
+                if (pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Ham +$0.25");
+                } else {
+                    pizza.addTopping("Ham");
+                }
             }
             if (extraCheese.isSelected()){
-                pizza.incrementItemPrice(.25);
-                pizza.addTopping("Extra Cheese");
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Extra Cheese +$0.25");
+                } else {
+                    pizza.addTopping("Extra Cheese");
+                }
             }
             if (greenPeppers.isSelected()){
-                pizza.incrementItemPrice(.25);
-                pizza.addTopping("Green Peppers");
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Green Peppers +$0.25");
+                } else {
+                    pizza.addTopping("Green Peppers");
+                }
             }
             if (pineapple.isSelected()){
-                pizza.incrementItemPrice(.25);
-                pizza.addTopping("Pineapple");
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Pineapple +$0.25");
+                } else {
+                    pizza.addTopping("Pineapple");
+                }
             }
             if (onion.isSelected()){
-                pizza.incrementItemPrice(4.0);
-                pizza.addTopping("Meat Lovers");
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Onion +$0.25");
+                } else {
+                    pizza.addTopping("Onion");
+                }
             }
             if (tomato.isSelected()){
-                pizza.incrementItemPrice(6.0);
-                pizza.addTopping("Veggie Lovers");
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Tomato +$0.25");
+                } else {
+                    pizza.addTopping("Tomato");
+                }
             }
             if (mushrooms.isSelected()){
-                pizza.incrementItemPrice(2.5);
-                pizza.addTopping("Mushrooms");
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Mushrooms +$0.25");
+                } else {
+                    pizza.addTopping("Mushrooms");
+                }
             }
+            double toppingPrice = 0.0;
+            if ( pizza.getToppings().size() > 1){
+                toppingPrice = .25 * pizza.getToppings().size();
+            }
+            pizza.incrementItemPrice(toppingPrice);
             pizza.setItemStringPrice(pizza.getItemPrice());
             orderTable.getItems().add(pizza);
-            order.setMenuItems(menuItems);
-            order.setTotal(calculateTotal());
         }
         resetTotals();
     }
