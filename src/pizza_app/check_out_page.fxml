@@ -57,43 +57,44 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" />
                   <JFXCheckBox fx:id="pepperoni" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Pepperoni">
                      <tooltip>
-                        <Tooltip text="+$2.50" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
-                  <JFXCheckBox fx:id="bellPeppers" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Bell Peppers" GridPane.rowIndex="1">
+                  <JFXCheckBox fx:id="greenPeppers" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Green Peppers" GridPane.rowIndex="1">
                      <tooltip>
-                        <Tooltip text="+$2.50" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
                   <JFXCheckBox fx:id="mushrooms" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Mushrooms" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <tooltip>
-                        <Tooltip text="+$2.50" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
-                  <JFXCheckBox fx:id="meatLovers" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Meat Lovers" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                  <JFXCheckBox fx:id="tomato" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Tomato" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <tooltip>
-                        <Tooltip text="+6.00 Includes Pepperoni, Ham, and Sausage" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
-                  <JFXCheckBox fx:id="veggieLovers" checkedColor="#a84040" prefHeight="18.0" prefWidth="121.0" text="Veggie Lovers" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <JFXCheckBox fx:id="onion" checkedColor="#a84040" prefHeight="18.0" prefWidth="121.0" text="Onion" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <tooltip>
-                        <Tooltip text="+4.00 Includes Bell Peppers, and Mushrooms" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
                   <JFXCheckBox fx:id="pineapple" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Pineapple" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <tooltip>
-                        <Tooltip text="+$2.50" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
                   <JFXCheckBox fx:id="ham" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Ham" GridPane.columnIndex="2">
                      <tooltip>
-                        <Tooltip text="+$2.50" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
                   <JFXCheckBox fx:id="sausage" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Sausage" GridPane.columnIndex="4">
                      <tooltip>
-                        <Tooltip text="+$2.50" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
                   <JFXCheckBox fx:id="extraCheese" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Extra Cheese" GridPane.rowIndex="2">
                      <tooltip>
-                        <Tooltip text="+$2.50" />
+                        <Tooltip text="+$0.25" />
                      </tooltip></JFXCheckBox>
                </children>
             </GridPane>
-            <Text layoutX="27.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Hover over toppings for details." />
+            <Text layoutX="27.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Hover over toppings for details." />
+            <Text layoutX="27.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*First topping is free." />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="500.0" layoutY="35.0" prefHeight="520.0" prefWidth="440.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">

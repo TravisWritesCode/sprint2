@@ -72,16 +72,16 @@ public class CheckoutController implements Initializable {
     private JFXCheckBox extraCheese;
 
     @FXML
-    private JFXCheckBox bellPeppers;
+    private JFXCheckBox greenPeppers;
 
     @FXML
     private JFXCheckBox pineapple;
 
     @FXML
-    private JFXCheckBox meatLovers;
+    private JFXCheckBox onion;
 
     @FXML
-    private JFXCheckBox veggieLovers;
+    private JFXCheckBox tomato;
 
     @FXML
     private JFXCheckBox mushrooms;
@@ -103,16 +103,18 @@ public class CheckoutController implements Initializable {
         //Pizza size dropdown
         final ArrayList<String> PIZZASIZES = new ArrayList<String>();
         ObservableList<String> pizzaSizes = FXCollections.observableList(PIZZASIZES);
-        pizzaSizes.add("Small +$10.00");
-        pizzaSizes.add("Medium +$15.00");
-        pizzaSizes.add("Large +20.00");
+        pizzaSizes.add("Small +$4.00");
+        pizzaSizes.add("Medium +$6.00");
+        pizzaSizes.add("Large +$8.00");
+        pizzaSizes.add("Extra Large +$10.00");
         size.setItems(pizzaSizes);
 
         //crust type dropdown
         final ArrayList<String> CRUSTTYPE = new ArrayList<String>();
         ObservableList<String> crustType = FXCollections.observableList(CRUSTTYPE);
-        crustType.add("Thin Crust");
-        crustType.add("Deep Dish +$5.00");
+        crustType.add("Thin");
+        crustType.add("Regular");
+        crustType.add("Pan");
         type.setItems(crustType);
 
         //set pickup by default
@@ -171,48 +173,47 @@ public class CheckoutController implements Initializable {
             Pizza pizza = new Pizza (size.getValue().toString(), type.getValue().toString());
             System.out.println("Pizza Type: " + size.getValue().toString() + " " +  type.getValue().toString());
             System.out.println(size.getValue().toString());
-            if(size.getValue().toString().equals("Small +$10.00")){
+            if(size.getValue().toString().equals("Small +$4.00")){
+                pizza.incrementItemPrice(4);
+            }
+            if(size.getValue().toString().equals("Medium +$6.00")){
+                pizza.incrementItemPrice(6);
+            }
+            if(size.getValue().toString().equals("Large +$8.00")){
+                pizza.incrementItemPrice(8);
+            }
+            if(size.getValue().toString().equals("Extra Large +$10.00")){
                 pizza.incrementItemPrice(10);
             }
-            if(size.getValue().toString().equals("Medium +$15.00")){
-                pizza.incrementItemPrice(15);
-            }
-            if(size.getValue().toString().equals("Large +$20.00")){
-                pizza.incrementItemPrice(20);
-            }
-            if(type.getValue().toString().equals("Deep Dish +$5.00")){
-                pizza.incrementItemPrice(5);
-            }
             if (pepperoni.isSelected()) {
-                System.out.println(pepperoni.isSelected());
-                pizza.incrementItemPrice(2.5);
+                pizza.incrementItemPrice(.25);
                 pizza.addTopping("Pepperoni");
             }
             if (sausage.isSelected()){
-                pizza.incrementItemPrice(2.5);
+                pizza.incrementItemPrice(.25);
                 pizza.addTopping("Sausage");
             }
             if (ham.isSelected()){
-                pizza.incrementItemPrice(2.5);
+                pizza.incrementItemPrice(.25);
                 pizza.addTopping("Ham");
             }
             if (extraCheese.isSelected()){
-                pizza.incrementItemPrice(2.5);
+                pizza.incrementItemPrice(.25);
                 pizza.addTopping("Extra Cheese");
             }
-            if (bellPeppers.isSelected()){
-                pizza.incrementItemPrice(2.5);
-                pizza.addTopping("Bell Peppers");
+            if (greenPeppers.isSelected()){
+                pizza.incrementItemPrice(.25);
+                pizza.addTopping("Green Peppers");
             }
             if (pineapple.isSelected()){
-                pizza.incrementItemPrice(2.5);
+                pizza.incrementItemPrice(.25);
                 pizza.addTopping("Pineapple");
             }
-            if (meatLovers.isSelected()){
+            if (onion.isSelected()){
                 pizza.incrementItemPrice(4.0);
                 pizza.addTopping("Meat Lovers");
             }
-            if (veggieLovers.isSelected()){
+            if (tomato.isSelected()){
                 pizza.incrementItemPrice(6.0);
                 pizza.addTopping("Veggie Lovers");
             }
