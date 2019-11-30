@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,37 +23,96 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="1000.0" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizza_app.CheckoutController">
    <children>
-      <AnchorPane layoutX="63.0" layoutY="68.0" prefHeight="200.0" prefWidth="414.0" style="-fx-border-color: black; -fx-border-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);">
+      <ImageView fitHeight="769.0" fitWidth="1138.0" layoutX="-52.0" layoutY="-130.0">
+         <image>
+            <Image url="@images/pizza2.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="63.0" layoutY="37.0" maxHeight="255.0" maxWidth="415.0" minHeight="255.0" minWidth="415.0" prefHeight="255.0" prefWidth="415.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
          <children>
-            <JFXButton fx:id="addButton" layoutX="283.0" layoutY="161.0" onAction="#addItem" style="-fx-background-color: #5CB85B;" text="Add Pizza to Order" textFill="WHITE" />
+            <JFXButton layoutX="270.0" layoutY="216.0" onAction="#addPizza" style="-fx-background-color: #5CB85B;" text="Add Pizza to Order" textFill="WHITE" />
             <Text layoutX="23.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Build Your Pizza">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Line endX="54.66796875" endY="0.0234375" layoutX="137.0" layoutY="46.0" startX="-114.0" startY="0.0234375" stroke="#dc3545" strokeWidth="2.0" />
-            <JFXComboBox layoutX="23.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Size" />
-            <JFXComboBox layoutX="152.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Crust Type" />
-            <JFXComboBox layoutX="283.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Crust Type" />
+            <Line endX="54.66796875" endY="0.0234375" layoutX="137.0" layoutY="46.0" startX="-114.0" startY="0.0234375" stroke="#a84040" strokeWidth="2.0" />
+            <JFXComboBox fx:id="size" focusColor="#a84040" layoutX="23.0" layoutY="57.0" maxWidth="140.0" minWidth="140.0" prefHeight="25.0" prefWidth="140.0" promptText="Size" />
+            <JFXComboBox fx:id="type" focusColor="#a84040" layoutX="172.0" layoutY="57.0" maxWidth="140.0" minWidth="140.0" prefHeight="25.0" prefWidth="140.0" promptText="Crust Type" />
+            <GridPane layoutX="27.0" layoutY="99.0" prefHeight="75.0" prefWidth="328.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" />
+                  <JFXCheckBox fx:id="pepperoni" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Pepperoni">
+                     <tooltip>
+                        <Tooltip text="+$2.50" />
+                     </tooltip></JFXCheckBox>
+                  <JFXCheckBox fx:id="bellPeppers" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Bell Peppers" GridPane.rowIndex="1">
+                     <tooltip>
+                        <Tooltip text="+$2.50" />
+                     </tooltip></JFXCheckBox>
+                  <JFXCheckBox fx:id="mushrooms" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Mushrooms" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <tooltip>
+                        <Tooltip text="+$2.50" />
+                     </tooltip></JFXCheckBox>
+                  <JFXCheckBox fx:id="meatLovers" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Meat Lovers" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <tooltip>
+                        <Tooltip text="+6.00 Includes Pepperoni, Ham, and Sausage" />
+                     </tooltip></JFXCheckBox>
+                  <JFXCheckBox fx:id="veggieLovers" checkedColor="#a84040" prefHeight="18.0" prefWidth="121.0" text="Veggie Lovers" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <tooltip>
+                        <Tooltip text="+4.00 Includes Bell Peppers, and Mushrooms" />
+                     </tooltip></JFXCheckBox>
+                  <JFXCheckBox fx:id="pineapple" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Pineapple" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <tooltip>
+                        <Tooltip text="+$2.50" />
+                     </tooltip></JFXCheckBox>
+                  <JFXCheckBox fx:id="ham" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Ham" GridPane.columnIndex="2">
+                     <tooltip>
+                        <Tooltip text="+$2.50" />
+                     </tooltip></JFXCheckBox>
+                  <JFXCheckBox fx:id="sausage" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Sausage" GridPane.columnIndex="4">
+                     <tooltip>
+                        <Tooltip text="+$2.50" />
+                     </tooltip></JFXCheckBox>
+                  <JFXCheckBox fx:id="extraCheese" checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Extra Cheese" GridPane.rowIndex="2">
+                     <tooltip>
+                        <Tooltip text="+$2.50" />
+                     </tooltip></JFXCheckBox>
+               </children>
+            </GridPane>
+            <Text layoutX="27.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Hover over toppings for details." />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="650.0" layoutY="49.0" prefHeight="502.0" prefWidth="305.0" style="-fx-border-color: black; -fx-border-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);">
+      <AnchorPane layoutX="500.0" layoutY="35.0" prefHeight="520.0" prefWidth="440.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
          <children>
-            <TableView fx:id="orderTable" layoutX="15.0" layoutY="13.0" prefHeight="289.0" prefWidth="276.0">
+            <TableView fx:id="orderTable" layoutX="15.0" layoutY="13.0" maxWidth="405.0" prefHeight="289.0" prefWidth="405.0">
               <columns>
-                <TableColumn fx:id="itemColumn" minWidth="192.0" prefWidth="192.0" text="Item" />
-                <TableColumn fx:id="priceColumn" minWidth="75.0" prefWidth="83.0" text="Price" />
+                <TableColumn fx:id="itemColumn" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Item" />
+                <TableColumn fx:id="priceColumn" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" text="Price" />
               </columns>
             </TableView>
-            <JFXButton layoutX="15.0" layoutY="311.0" onAction="#removeItem" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #DC3545;" text="Remove Item" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-            <JFXButton fx:id="submitOrder" layoutX="15.0" layoutY="450.0" onAction="#setTotals" prefHeight="38.0" prefWidth="276.0" style="-fx-background-color: #5CB85B;" text="Submit Order" textFill="WHITE">
+            <JFXButton layoutX="15.0" layoutY="311.0" onAction="#removeItem" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #a84040;" text="Remove Selected Item" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+            <JFXButton fx:id="submitOrder" layoutX="15.0" layoutY="467.0" onAction="#setTotals" prefHeight="38.0" prefWidth="405.0" style="-fx-background-color: #5CB85B;" text="Place Order" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="18.0" />
                </font></JFXButton>
-            <GridPane layoutX="109.0" layoutY="311.0" prefHeight="126.0" prefWidth="182.0">
+            <GridPane layoutX="196.0" layoutY="311.0" prefHeight="128.0" prefWidth="224.0">
               <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="89.0" />
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="93.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="109.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="115.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -57,33 +122,73 @@
               </rowConstraints>
                <children>
                   <Label text="Subtotal:" textAlignment="RIGHT" />
-                  <Label text="Fees:" textAlignment="RIGHT" GridPane.rowIndex="1" />
+                  <Label prefHeight="18.0" prefWidth="69.0" text="Delivery Fee:" textAlignment="RIGHT" GridPane.rowIndex="1" />
                   <Label text="Tax:" textAlignment="RIGHT" GridPane.rowIndex="2" />
-                  <JFXTextField fx:id="fees" focusColor="#4d4d4d" maxWidth="74.0" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXTextField fx:id="tax" focusColor="#4d4d4d" maxWidth="74.0" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXTextField fx:id="total" focusColor="#4d4d4d" maxWidth="74.0" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="fee" focusColor="#4d4d4d" maxWidth="100.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="tax" focusColor="#4d4d4d" maxWidth="100.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXTextField fx:id="total" focusColor="#4d4d4d" maxWidth="100.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Total:" textAlignment="RIGHT" GridPane.rowIndex="3" />
-                  <JFXTextField fx:id="subtotal" focusColor="#4d4d4d" maxWidth="74.0" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1">
+                  <JFXTextField fx:id="subtotal" focusColor="#4d4d4d" maxWidth="100.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <cursor>
                         <Cursor fx:constant="NONE" />
                      </cursor>
                   </JFXTextField>
                </children>
             </GridPane>
+            <AnchorPane layoutX="15.0" layoutY="346.0" prefHeight="96.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 5px;">
+               <children>
+                  <JFXRadioButton fx:id="delivery" layoutX="92.0" layoutY="56.0" onAction="#setIsDelivery" text="Delivery">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="pickupOrDelivery" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="pickup" layoutX="11.0" layoutY="56.0" onAction="#setIsDelivery" text="Pickup" toggleGroup="$pickupOrDelivery" />
+                  <Text layoutX="11.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Pickup or Delivery">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="63.0" layoutY="300.0" prefHeight="200.0" prefWidth="414.0" style="-fx-border-color: black; -fx-border-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);">
+      <AnchorPane layoutX="63.0" layoutY="300.0" maxHeight="255.0" maxWidth="415.0" minHeight="255.0" minWidth="415.0" prefHeight="255.0" prefWidth="415.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
          <children>
-            <JFXButton fx:id="addButton2" layoutX="283.0" layoutY="161.0" onAction="#addItem" style="-fx-background-color: #5CB85B;" text="Add Extras to Order" textFill="WHITE" />
+            <JFXButton fx:id="addButton2" layoutX="266.0" layoutY="216.0" style="-fx-background-color: #5CB85B;" text="Add Extras to Order" textFill="WHITE" />
             <Text layoutX="23.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Extras">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Line endX="-1.65234375" endY="0.0234375" layoutX="137.0" layoutY="46.0" startX="-114.0" startY="0.0234375" stroke="#dc3545" strokeWidth="2.0" />
-            <JFXComboBox layoutX="23.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Size" />
-            <JFXComboBox layoutX="152.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Crust Type" />
-            <JFXComboBox layoutX="283.0" layoutY="69.0" prefHeight="25.0" prefWidth="116.0" promptText="Crust Type" />
+            <Line endX="-1.65234375" endY="0.0234375" layoutX="137.0" layoutY="46.0" startX="-114.0" startY="0.0234375" stroke="#a84040" strokeWidth="2.0" />
+            <GridPane layoutX="28.0" layoutY="93.0" prefHeight="60.0" prefWidth="360.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Bread Sticks" />
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="114.0" text="10 BBQ Wings" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Ranch" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Marinara" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Garlic Sauce" GridPane.rowIndex="2" />
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Garlic Knots" GridPane.columnIndex="2" />
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="122.0" text="10 Plain Wings" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="95.0" text="Cookie" GridPane.columnIndex="4" />
+                  <JFXCheckBox checkedColor="#a84040" prefHeight="18.0" prefWidth="130.0" text="10 Bufallo Wings" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <JFXComboBox fx:id="size1" focusColor="#a84040" layoutX="111.0" layoutY="64.0" prefHeight="25.0" prefWidth="105.0" promptText="Flavor" />
+            <JFXCheckBox checkedColor="#a84040" layoutX="28.0" layoutY="67.0" prefHeight="18.0" prefWidth="83.0" text="2 Liter" />
          </children>
       </AnchorPane>
    </children>

@@ -3,10 +3,6 @@
    -fx-text-fill: white;
 }
 
-#summaryTable .column-header-background {
-    visibility: hidden; -fx-padding: -1em;
-    }
-
 .table-view: focused{
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;

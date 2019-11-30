@@ -3,31 +3,35 @@ package pizza_app;
 import javafx.collections.ObservableList;
 
 public class Order {
-    private String item;
+    private Pizza[] pizzas;
+    private ObservableList<MenuItem> menuItems;
+    private String customerPhoneNumber;
+    private int orderId;
+    private String orderDate;
+    private String paymentType;
+    private boolean isDelivery;
+    private float orderTotal;
     private double price;
     private double subtotal;
     private double fee;
     private double tax;
+
+    public Pizza[] getPizzas() {
+        return pizzas;
+    }
+
+    public void setPizzas(Pizza[] pizzas) {
+        this.pizzas = pizzas;
+    }
+
     private double total;
     private String stringPrice;
 
-    public Order(String item, double price){
-        this.item = item;
-        this.price = price;
-        stringPrice = "$" + String.format("%.2f", price);
-    }
+    public Order(){}
 
     public String getStringPrice() { return stringPrice; }
 
     public void setStringPrice(String stringPrice) { this.stringPrice = stringPrice; }
-
-    public String getItem (){
-        return this.item;
-    }
-
-    public void setItem(String item){
-        this.item = item;
-    }
 
     public double getPrice(){
         return this.price;
@@ -55,4 +59,8 @@ public class Order {
     public double getTotal() { return total; }
 
     public void setTotal(Double total) { this.total = total; }
+
+    public void setMenuItems(ObservableList<MenuItem> menuItems){
+        this.menuItems = menuItems;
+    }
 }
