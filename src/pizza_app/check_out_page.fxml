@@ -182,7 +182,7 @@
                      </tooltip></JFXCheckBox>
                   <JFXCheckBox fx:id="cookie" checkedColor="#a84040" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="194.0" text="Big Choc. Chip Cookie" GridPane.rowIndex="2">
                      <tooltip>
-                        <Tooltip text="\$2.00" />
+                        <Tooltip text="\\$4.00" />
                      </tooltip></JFXCheckBox>
                </children>
             </GridPane>
