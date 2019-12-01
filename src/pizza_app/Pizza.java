@@ -9,7 +9,7 @@ public class Pizza extends MenuItem {
     public Pizza(String itemSize, String crustType){
         super("Pizza", itemSize);
         this.crustType = crustType;
-        this.colDisplay = itemSize + " Pizza ;" + crustType;
+        this.colDisplay = " Pizza- " + itemSize + "; " + crustType;
     }
 
     public String getCrustType() {

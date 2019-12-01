@@ -321,7 +321,7 @@ public class CheckoutController implements Initializable {
                 }
             }
             if (tomato.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
+               if ( pizza.getToppings().size() >= 1){
                     pizza.addTopping("Tomato +$0.25");
                 } else {
                     pizza.addTopping("Tomato");
