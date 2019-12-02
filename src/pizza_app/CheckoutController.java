@@ -12,6 +12,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * <p>This class implements the JavaFX interface Initializable which allows for intereaction
+ * to variables injected with @FXML. The type of FXML variables that were used are as follows:
+ * <li><ul>
+ *     TableColumn
+ *     ChoiceBox
+ *     JFXButton
+ *     JFXTextField
+ *     JFXComboBox
+ *     JFXCheckBox
+ *     JFXRadioButton
+ *     ObservableList
+ * </ul></li>
+ * This class also includes an overriden initialize method and other methods to assist in making
+ * changes to pizza order information.
+ * </p>
+ */
 public class CheckoutController implements Initializable {
 
     @FXML
@@ -116,6 +133,21 @@ public class CheckoutController implements Initializable {
     //Create order
     Order order = new Order();
 
+    /**
+     * <p>
+     *     This is an overriden method for initialize which instantiates all necessary GUI
+     * features for the checkout process in our "Pizza App". It also utilizes JavaFX's
+     * ObservableList to actively listen and track any changes when they occur for the
+     * following attributes of the order:
+     * <li><ul>
+     *     pizza size
+     *     crust type
+     *     drink flavor
+     * </ul></li>
+     * </p>
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Pizza size dropdown
@@ -174,12 +206,33 @@ public class CheckoutController implements Initializable {
 
     }
 
+    /**
+     * <p>
+     *     Returns all selected items in the current order session by calling on
+     *     FXCollections.orbservableArrayList()
+     * </p>
+     * @return ObservableList of type MenuItem
+     */
     // this method returns all of the items in the order
     ObservableList<MenuItem> getItemList(){
         ObservableList<MenuItem> menuItems = FXCollections.observableArrayList();
         return menuItems;
     }
 
+    /**
+     * <p>
+     *     Specifically to pizza sides, this utilizes multiple if conditionals to create a menu item, set item price, set
+     *     string price and add the new item to the orderTable Object once one of the following
+     *     checkboxes are selected:
+     *     <li><ul>
+     *         breadstick
+     *         breadstickBites
+     *         cookie
+     *     </ul></li>
+     *     If none of these are selected, it alerts user that their selection was invalid.
+     * </p>
+     * @param ActionEvent e
+     */
     // adds item to order
     public void addSide(ActionEvent e) {
         if ( !breadsticks.isSelected() && !breadstickBites.isSelected() && !cookie.isSelected()){
@@ -213,6 +266,20 @@ public class CheckoutController implements Initializable {
         resetTotals();
     }
 
+    /**
+     * <p>
+     *     Specifically to drink sizes, this utilizes multiple if conditionals to create a menu item, set item price, set
+     *     string price and add the new item to the orderTable Object once one of the following
+     *     checkboxes are selected:
+     *     <li><ul>
+     *         small
+     *         medium
+     *         large
+     *     </ul></li>
+     *     If none of these are selected, it alerts user that their selection was invalid.
+     * </p>
+     * @param e
+     */
     // adds item to order
     public void addDrink(ActionEvent e) {
         if (flavors.getValue() == null){
@@ -237,7 +304,7 @@ public class CheckoutController implements Initializable {
                 orderTable.getItems().add(drink);
             }
             if (large.isSelected()){
-                drink = new MenuItem ("Medium " + flavors.getValue().toString());
+                drink = new MenuItem ("Large " + flavors.getValue().toString());//yo I changes the string from medium to large
                 drink.setItemPrice(1);
                 drink.setItemStringPrice(drink.getItemPrice());
                 orderTable.getItems().add(drink);
@@ -246,6 +313,39 @@ public class CheckoutController implements Initializable {
         resetTotals();
     }
 
+    /**
+     * <p>
+     *     Specifically to drink sizes, this utilizes multiple if conditionals to add a pizza with specified size,
+     *     crust type, and toppings by selecting the coordinating buttons. The options for sizes are as follows:
+     *     <li><ul>
+     *         small
+     *         medium
+     *         large
+     *         extra-large
+     *     </ul></li>
+     *     The options for crusts are:
+     *     <li><ul>
+     *         thin crust
+     *         hand tossed
+     *         pan
+     *     </ul></li>
+     *     The options for toppings are:
+     *     <li><ul>
+     *         pepperoni
+     *         sausage
+     *         ham
+     *         extra cheese
+     *         green pepper
+     *         pineapple
+     *         onion
+     *         tomato
+     *         mushroom
+     *     </ul></li>
+     *     If no size nor crust type is selected, it alerts user that their selection was invalid. Also
+     *     note that the first topping is free but any additional topping will by .25 added which will include
+     *     .25 of the first topping.
+     * </p>
+     */
     // adds pizza to order
     public void addPizza() {
         if (size.getValue() == null|| type.getValue() == null){
@@ -345,6 +445,11 @@ public class CheckoutController implements Initializable {
         resetTotals();
     }
 
+    /**
+     * If delivery is selected, sets the delivery fee to 2.50
+     *  else keeps the delivery fee section to 0.0
+     * @param e
+     */
     public void setIsDelivery(ActionEvent e){
         if (delivery.isSelected()){
             fee.setText("$"+ java.lang.String.format("%.2f", 2.5));
@@ -355,6 +460,15 @@ public class CheckoutController implements Initializable {
         }
     }
 
+    /**
+     * If action prompted, will do the following:
+     * <li><ol>
+     *     remove all items from the orderTable
+     *     resetTotal
+     *     (if delivery was previously selected) will set pickup to be true instead and set the delivery fee to 0.0
+     * </ol></li>
+     * @param e
+     */
     @FXML
     private void removeItem(ActionEvent e){
         orderTable.getItems().removeAll(orderTable.getSelectionModel().getSelectedItem());
@@ -367,13 +481,29 @@ public class CheckoutController implements Initializable {
         order.setTotal(calculateTotal());
     }
 
+    /**
+     * When prompted, sets the text of the following to have 2 decimal places and a preceding $ sign:
+     * <li><ul>
+     *     subtotal
+     *     tax (going according to current Atlanta food tax percentage)
+     *     total (subtotal + tax)
+     * </ul></li>
+     * @param e
+     */
     @FXML
     private void setTotals(ActionEvent e){
         subtotal.setText("$"+ java.lang.String.format("%.2f", calculateSubtotal()));
         tax.setText("$"+ java.lang.String.format("%.2f", calculateTax()));
         total.setText("$"+ java.lang.String.format("%.2f", calculateTotal()));
     }
-
+    /**
+     * When called, resets the text of the following to have 2 decimal places and a preceding $ sign:
+     * <li><ul>
+     *     subtotal
+     *     tax (going according to current Atlanta food tax percentage)
+     *     total (subtotal + tax)
+     * </ul></li>
+     */
     public void resetTotals(){
         double mySubtotal =calculateSubtotal();
         subtotal.setText("$"+ java.lang.String.format("%.2f", mySubtotal));
@@ -382,6 +512,12 @@ public class CheckoutController implements Initializable {
         order.setTotal(calculateTotal());
     }
 
+    /**
+     * When called, will calculate the current subtotal of the order by adding
+     * the price of all MenuItems currently selected and (if delivery is/was selected)
+     * will add an additional 2.50
+     * @return subtotal
+     */
     private double calculateSubtotal(){
         double mySubtotal = 0.0;
         for (MenuItem item : menuItems) {
@@ -394,10 +530,19 @@ public class CheckoutController implements Initializable {
         }
     }
 
+    /**
+     * When called, will calculate the food tax amount based on the current subtotal. Note: this uses
+     * Atlanta's current food tax, 8.9%
+     * @return tax
+     */
     private double calculateTax (){
         return (calculateSubtotal() * .089);
     }
 
+    /**
+     * When called, will calculate the total by adding the current subtotal and tax.
+     * @return total
+     */
     private double calculateTotal(){
          return calculateSubtotal() + calculateTax();
     }
