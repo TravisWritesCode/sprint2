@@ -14,6 +14,28 @@ import com.jfoenix.controls.JFXPasswordField;
 
 import java.io.*;
 
+/**
+ * <p>
+ *     Precondition: for this class' functions to work properly, you
+ *     will need to have the provided customerRecord.csv file in the same folder as the .jar file for the application.
+ *     This class imports the javafx.fxml.FXMLLoader so does not need to implement the Initializable interface.
+ *     The type of FXML varibales that are used from that library are as follows:
+ *     <li><ul>
+ *         Pane
+ *         JFXTextField
+ *         JFXPasswordField
+ *     </ul></li>
+ *     This class also includes all methods necessary for login functionalities, which include:
+ *     <li><ul>
+ *         verifying login credentials
+ *         adding new user accounts
+ *         logging in
+ *         verifying phone number validity 
+ *         verifying alphabetic validity
+ *         adjusting screen accordingly(i.e. login, new account, home)
+ *     </ul></li>
+ * </p>
+ */
 public class LoginController {
 
     @FXML
@@ -36,7 +58,14 @@ public class LoginController {
     @FXML
     private JFXPasswordField confPassword;
 
-
+    /**
+     * When called, parses through the customerRecord.csv local file and checks if there is an instance 
+     * where the passed in phone number and password are listed
+     * @param phoneNum
+     * @param pWord
+     * @return boolean (false if no account found, true if account found)
+     * @throws IOException
+     */
     //checks database for user account
     private boolean verifyLogin(String phoneNum, String pWord) throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader("./customerRecord.csv"));
@@ -63,6 +92,16 @@ public class LoginController {
         record = new String[]{};
         return false;
     }
+
+    /**
+     * When called, creates a new user account with the inputted parameters and saves it the the customerRecord.csv local file
+     * @param phoneNum
+     * @param fName
+     * @param lName
+     * @param password
+     * @return boolean(false if new user's phone number already exists in the csv file)
+     * @throws IOException
+     */
     //adds new user account to database
     private boolean addRecord(String phoneNum, String fName, String lName, String password) throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader("./customerRecord.csv"));
@@ -93,6 +132,17 @@ public class LoginController {
         return true;
     }
 
+    /**
+     * <p>When actionEvent occurs, this utilizes multiple if conditionals to allow user to login by inputting the following:
+     * <li><ul>
+     *     phone number
+     *     password
+     * </ul></li>
+     * If either inputted values are invalid, cooresponding error messages will appear and prompt the user to correct their mistake
+     *  </p>
+     * @param e
+     * @throws Exception
+     */
     @FXML //performs login actions
     private void login(ActionEvent e) throws Exception{
         try {
@@ -125,6 +175,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Validates the input for names to be only alphabetical 
+     * @param text
+     * @return boolean(false if non-alphabetic)
+     */
     //validates inputs for names
     private boolean validateAlphabets(String text){
         String[] words = text.split(" ");
@@ -135,6 +190,12 @@ public class LoginController {
         }
         return true;
     }
+
+    /**
+     * Validates phone number is numeric and correct length
+     * @param text
+     * @return boolean (false if is not correct length nor is numeric)
+     */
     //validates inputs for phone numbers
     private boolean validatePhoneNumber(String text){
         if(!text.matches("\\d{10}")){
@@ -142,7 +203,19 @@ public class LoginController {
         }
         return true;
     }
-
+    /**
+     * <p>When actionEvent occurs, this utilizes multiple if conditionals to allow user to create a new account by inputting the following:
+     * <li><ul>
+     *     phone number
+     *     First Name
+     *     Last Name
+     *     password
+     * </ul></li>
+     * If either inputted values are invalid, cooresponding error messages will appear and prompt the user to correct their mistake
+     *  </p>
+     * @param e
+     * @throws Exception
+     */
     @FXML //performs sign up actions
     private void createAccount(ActionEvent e) throws Exception{
         try {
@@ -198,6 +271,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Changes GUI window to SignUp 
+     * @param e
+     * @throws Exception
+     */
     @FXML //goes to signup
     private void changeToSignup(ActionEvent e) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
@@ -206,6 +284,11 @@ public class LoginController {
         s.show();
     }
 
+    /**
+     * Changes GUI window to Login
+     * @param e
+     * @throws Exception
+     */
     @FXML //goes to login
     private void changeToLogin(ActionEvent e) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -214,6 +297,11 @@ public class LoginController {
         s.show();
     }
 
+    /**
+     * Changes GUI window to Home
+     * @param e
+     * @throws Exception
+     */
     @FXML //returns to home page
     private void changeToHome(ActionEvent e) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
