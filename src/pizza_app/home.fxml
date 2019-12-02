@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.layout.VBox?>
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizza_app.LoginController">
+    <children>
+        <ImageView fitHeight="797.0" fitWidth="1145.0" layoutX="-33.0" layoutY="-149.0">
+            <image>
+                <Image url="@./images/pizza2.jpg" />
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="313.0" layoutY="99.0" prefHeight="417.0" prefWidth="375.0" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-radius: 10px;">
+            <children>
+                <Text fill="#5b5b5b" layoutX="35.0" layoutY="50.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="2.0" text="WELCOME TO">
+                    <font>
+                        <Font name="SansSerif Bold" size="15.0" />
+                    </font>
+                </Text>
+                <Text fill="#ef3c38" layoutX="35.0" layoutY="80.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="2.0" text="Mom &amp; Pop's Pizza">
+                    <font>
+                        <Font name="SansSerif Regular" size="23.0" />
+                    </font>
+                </Text>
+                <Line endX="29.0" layoutX="135.0" layoutY="97.0" startX="-100.0" />
+                <VBox alignment="CENTER" layoutY="145.0" prefHeight="218.0" prefWidth="377.0" spacing="40.0">
+                    <children>
+                        <JFXButton onAction="#changeToSignup" prefHeight="49.0" prefWidth="301.0" style="-fx-background-color: #ef3c38;" text="New Customer &#10;Sign Up" textAlignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="SansSerif Regular" size="15.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton layoutX="48.0" layoutY="95.0" onAction="#changeToLogin" prefHeight="49.0" prefWidth="301.0" style="-fx-background-color: #ef3c38;" text="Returning Customer&#10;Log In" textAlignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="SansSerif Regular" size="15.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </JFXButton>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <ImageView layoutX="14.0" layoutY="507.0">
+            <image>
+                <Image url="@images/3pgLogo.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

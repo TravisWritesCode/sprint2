@@ -1,0 +1,1 @@
+﻿README.TXT———————————This is a demo version of the ‘Mom & Pop’s Pizza’ application by 3PG Solutions.Please note that for a functional experience, you will need to have the provided customerRecord.csv file in the same folder as the .jar file for the application. This demo application WILL NOT function as intended if this is not the case.———————————3PG SOLUTIONS. 2019
