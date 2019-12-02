@@ -59,6 +59,48 @@ public class LoginController {
     private JFXPasswordField confPassword;
 
     /**
+     * Validates the input for names to be only alphabetical (w/ characters commonly included in names as well)
+     * @param text
+     * @return boolean(false if non-alphabetic)
+     */
+    //validates inputs for names
+    private boolean validateAlphabets(String text){
+        String[] words = text.split(" ");
+        for (String word : words) {
+            if (!word.matches("([a-z]|[A-Z]|'|`|-|\\.)+")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Validates the input for passwords to be only alphanumeric
+     * @param text
+     * @return boolean(false if non-alphanumeric)
+     */
+    //validates inputs for passwords
+    private boolean validatePassword(String text){
+        if(!text.matches("([a-z]|[A-Z]|\\d){1,30}")){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validates phone number is numeric and correct length
+     * @param text
+     * @return boolean (false if is not correct length nor is numeric)
+     */
+    //validates inputs for phone numbers
+    private boolean validatePhoneNumber(String text){
+        if(!text.matches("\\d{10}")){
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * When called, parses through the customerRecord.csv local file and checks if there is an instance 
      * where the passed in phone number and password are listed
      * @param phoneNum
@@ -175,34 +217,7 @@ public class LoginController {
         }
     }
 
-    /**
-     * Validates the input for names to be only alphabetical 
-     * @param text
-     * @return boolean(false if non-alphabetic)
-     */
-    //validates inputs for names
-    private boolean validateAlphabets(String text){
-        String[] words = text.split(" ");
-        for (String word : words) {
-            if (!word.matches("([a-z]||[A-Z])+")) {
-                return false;
-            }
-        }
-        return true;
-    }
 
-    /**
-     * Validates phone number is numeric and correct length
-     * @param text
-     * @return boolean (false if is not correct length nor is numeric)
-     */
-    //validates inputs for phone numbers
-    private boolean validatePhoneNumber(String text){
-        if(!text.matches("\\d{10}")){
-            return false;
-        }
-        return true;
-    }
     /**
      * <p>When actionEvent occurs, this utilizes multiple if conditionals to allow user to create a new account by inputting the following:
      * <li><ul>
@@ -211,7 +226,7 @@ public class LoginController {
      *     Last Name
      *     password
      * </ul></li>
-     * If either inputted values are invalid, cooresponding error messages will appear and prompt the user to correct their mistake
+     * If either inputted values are invalid, corresponding error messages will appear and prompt the user to correct their mistake
      *  </p>
      * @param e
      * @throws Exception
@@ -240,7 +255,14 @@ public class LoginController {
                 alert.showAndWait();
             } else {
                 if (newPassword.getText().equals(confPassword.getText())) {
-                    if (addRecord(newPhone.getText(), newFName.getText(), newLName.getText(), newPassword.getText())) {
+                    if(!validatePassword(newPassword.getText())){
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Account Creation Failed");
+                        alert.setHeaderText("Invalid Password!");
+                        alert.setContentText("Please make sure you are only using alphanumeric characters and try again. Passwords cannot be more than 30 characters.");
+                        alert.showAndWait();
+                    }
+                    else if(addRecord(newPhone.getText(), newFName.getText(), newLName.getText(), newPassword.getText())) {
                         Stage stage = (Stage) root.getScene().getWindow();
                         Parent checkOut = FXMLLoader.load(getClass().getResource("check_out_page.fxml"));
                         Scene scene = new Scene(checkOut);
