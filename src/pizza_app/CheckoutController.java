@@ -231,7 +231,7 @@ public class CheckoutController implements Initializable {
      *     </ul></li>
      *     If none of these are selected, it alerts user that their selection was invalid.
      * </p>
-     * @param ActionEvent e
+     * @param e
      */
     // adds item to order
     public void addSide(ActionEvent e) {
@@ -357,8 +357,6 @@ public class CheckoutController implements Initializable {
         }
         else {
             Pizza pizza = new Pizza (size.getValue().toString(), type.getValue().toString());
-            System.out.println("Pizza Type: " + size.getValue().toString() + " " +  type.getValue().toString());
-            System.out.println(size.getValue().toString());
             if(size.getValue().toString().equals("Small +$4.00")){
                 pizza.incrementItemPrice(4);
             }
@@ -372,65 +370,83 @@ public class CheckoutController implements Initializable {
                 pizza.incrementItemPrice(10);
             }
             if (pepperoni.isSelected()) {
-                if (pizza.getToppings().size() >= 1){
+                if (pizza.getToppings().size() > 1){
                     pizza.addTopping("Pepperoni +$0.25");
-                } else {
+                } else if (pizza.getToppings().size() == 1){
+                    pizza.addTopping("Pepperoni +$0.50");
+                }else {
                     pizza.addTopping("Pepperoni");
                 }
             }
             if (sausage.isSelected()){
-                if (pizza.getToppings().size() >= 1){
+                if (pizza.getToppings().size() > 1){
                     pizza.addTopping("Sausage +$0.25");
-                } else {
+                } else if (pizza.getToppings().size() == 1){
+                    pizza.addTopping("Sausage +$0.50");
+                }else {
                     pizza.addTopping("Sausage");
                 }
             }
             if (ham.isSelected()){
-                if (pizza.getToppings().size() >= 1){
+                if (pizza.getToppings().size() > 1){
                     pizza.addTopping("Ham +$0.25");
-                } else {
+                } else if (pizza.getToppings().size() == 1){
+                    pizza.addTopping("Ham +$0.50");
+                }else {
                     pizza.addTopping("Ham");
                 }
             }
             if (extraCheese.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
+                if ( pizza.getToppings().size() > 1){
                     pizza.addTopping("Extra Cheese +$0.25");
-                } else {
+                } else if (pizza.getToppings().size() == 1){
+                    pizza.addTopping("Extra Cheese +$0.50");
+                }else {
                     pizza.addTopping("Extra Cheese");
                 }
             }
             if (greenPeppers.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
+                if ( pizza.getToppings().size() > 1){
                     pizza.addTopping("Green Peppers +$0.25");
-                } else {
+                } else if (pizza.getToppings().size() == 1){
+                    pizza.addTopping("Green Peppers +$0.50");
+                }else {
                     pizza.addTopping("Green Peppers");
                 }
             }
             if (pineapple.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
+                if ( pizza.getToppings().size() > 1){
                     pizza.addTopping("Pineapple +$0.25");
+                }else if (pizza.getToppings().size() == 1){
+                    pizza.addTopping("Pineapple +$0.50");
                 } else {
                     pizza.addTopping("Pineapple");
                 }
             }
             if (onion.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
+                if ( pizza.getToppings().size() > 1){
                     pizza.addTopping("Onion +$0.25");
-                } else {
+                } else if (pizza.getToppings().size() == 1){
+                    pizza.addTopping("Onion +$0.50");
+                }else {
                     pizza.addTopping("Onion");
                 }
             }
             if (tomato.isSelected()){
-               if ( pizza.getToppings().size() >= 1){
+               if ( pizza.getToppings().size() > 1){
                     pizza.addTopping("Tomato +$0.25");
-                } else {
+                } else if (pizza.getToppings().size() == 1){
+                   pizza.addTopping("Tomato +$0.50");
+               }else {
                     pizza.addTopping("Tomato");
                 }
             }
             if (mushrooms.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
+                if ( pizza.getToppings().size() > 1){
                     pizza.addTopping("Mushrooms +$0.25");
-                } else {
+                } else if (pizza.getToppings().size() == 1){
+                    pizza.addTopping("Mushrooms +$0.50");
+                }else {
                     pizza.addTopping("Mushrooms");
                 }
             }
@@ -473,7 +489,6 @@ public class CheckoutController implements Initializable {
     private void removeItem(ActionEvent e){
         orderTable.getItems().removeAll(orderTable.getSelectionModel().getSelectedItem());
         resetTotals();
-        System.out.println(total.getText());
         if (total.getText() == "$2.50" && delivery.isSelected() ){
             fee.setText("$0.00");
             pickup.setSelected(true);

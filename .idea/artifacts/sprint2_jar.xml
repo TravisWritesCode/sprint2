@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="sprint2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/sprint2_jar</output-path>
+    <root id="archive" name="sprint2.jar">
+      <element id="module-output" name="sprint2" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jfoenix-8.0.8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
