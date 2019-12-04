@@ -13,8 +13,6 @@ import javafx.stage.Stage;
  * This is the main class which includes the overriden start function and the main function which will launch the application
  */
 public class Main extends Application {
-    private static ObservableList<Order> orderData = FXCollections.observableArrayList();
-
     /**
      * Ovveriden start method which assigns the title and root for our application to be
      * the home.fxml file

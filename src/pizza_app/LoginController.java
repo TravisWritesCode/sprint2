@@ -75,13 +75,13 @@ public class LoginController {
     }
 
     /**
-     * Validates the input for passwords to be only alphanumeric
+     * Validates the input for passwords to be only alphanumeric, and a specific length
      * @param text
-     * @return boolean(false if non-alphanumeric)
+     * @return boolean(false if non-alphanumeric or outside of length requirements)
      */
     //validates inputs for passwords
     private boolean validatePassword(String text){
-        if(!text.matches("([a-z]|[A-Z]|\\d){1,30}")){
+        if(!text.matches("([a-z]|[A-Z]|\\d){5,30}")){
             return false;
         }
         return true;
@@ -259,7 +259,7 @@ public class LoginController {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Account Creation Failed");
                         alert.setHeaderText("Invalid Password!");
-                        alert.setContentText("Please make sure you are only using alphanumeric characters and try again. Passwords cannot be more than 30 characters.");
+                        alert.setContentText("Please make sure you are only using alphanumeric characters and try again. Passwords must be between 5 and 30 characters in length.");
                         alert.showAndWait();
                     }
                     else if(addRecord(newPhone.getText(), newFName.getText(), newLName.getText(), newPassword.getText())) {

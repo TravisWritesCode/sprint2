@@ -45,7 +45,7 @@
                      </font></JFXPasswordField>
                   <VBox prefHeight="89.0" prefWidth="309.0" spacing="10.0">
                      <children>
-                        <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#login" prefHeight="39.0" prefWidth="377.0" style="-fx-background-color: #ef3c38;" text="Login" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton alignment="CENTER" contentDisplay="CENTER" defaultButton="true" onAction="#login" prefHeight="39.0" prefWidth="377.0" style="-fx-background-color: #ef3c38;" text="Login" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="SansSerif Regular" size="15.0" />
                            </font>
@@ -53,7 +53,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#changeToHome" prefHeight="39.0" prefWidth="377.0" style="-fx-background-color: #ef3c38;" text="Cancel" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton alignment="CENTER" cancelButton="true" contentDisplay="CENTER" onAction="#changeToHome" prefHeight="39.0" prefWidth="377.0" style="-fx-background-color: #ef3c38;" text="Cancel" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="SansSerif Regular" size="15.0" />
                            </font>
