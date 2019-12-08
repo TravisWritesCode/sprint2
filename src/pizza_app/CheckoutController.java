@@ -4,7 +4,6 @@ import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,15 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +51,12 @@ public class CheckoutController implements Initializable {
 
     @FXML
     private TableColumn<MenuItem, String> priceColumn;
+
+    @FXML
+    private TableColumn<MenuItem, String> reviewItemColumn;
+
+    @FXML
+    private TableColumn<MenuItem, String> reviewPriceColumn;
 
     @FXML
     private ChoiceBox item;
@@ -141,8 +142,23 @@ public class CheckoutController implements Initializable {
     @FXML
     private JFXRadioButton large;
 
+    @FXML
+    private Hyperlink viewToppingPrices;
+
+    @FXML
+    private TableView<MenuItem> reviewOrderTable;
+
+
     //this is a list to contain the items in the order
-    private ObservableList<MenuItem> menuItems = getItemList();
+    private static ObservableList<MenuItem> menuItems = getItemList();
+
+    public static ObservableList<MenuItem> getMenuItems(){
+        return menuItems;
+    }
+
+    public static void clearMenuItems(){
+       menuItems.setAll();
+    }
 
     //Create order
     Order order = new Order();
@@ -215,6 +231,7 @@ public class CheckoutController implements Initializable {
         itemColumn.setCellFactory(TooltippedTableCell.forTableColumn());
         orderTable.setItems(menuItems);
 
+
         //Set delivery fee set to 0.00 in order summary box
         fee.setText("$0.00");
 
@@ -228,7 +245,7 @@ public class CheckoutController implements Initializable {
      * @return ObservableList of type MenuItem
      */
     // this method returns all of the items in the order
-    private ObservableList<MenuItem> getItemList(){
+    private static ObservableList<MenuItem> getItemList(){
         ObservableList<MenuItem> menuItems = FXCollections.observableArrayList();
         return menuItems;
     }
@@ -320,7 +337,7 @@ public class CheckoutController implements Initializable {
                 orderTable.getItems().add(drink);
             }
             if (large.isSelected()){
-                drink = new MenuItem ("Large " + flavors.getValue().toString());//yo I changes the string from medium to large
+                drink = new MenuItem ("Large " + flavors.getValue().toString());//yo I changed the string from medium to large
                 drink.setItemPrice(1);
                 drink.setItemStringPrice(drink.getItemPrice());
                 orderTable.getItems().add(drink);
@@ -358,8 +375,7 @@ public class CheckoutController implements Initializable {
      *         mushroom
      *     </ul></li>
      *     If no size nor crust type is selected, it alerts user that their selection was invalid. Also
-     *     note that the first topping is free but any additional topping will by .25 added which will include
-     *     .25 of the first topping.
+     *     note that the first topping is free but any additional topping will incur additional charges.
      * </p>
      */
     // adds pizza to order
@@ -373,107 +389,101 @@ public class CheckoutController implements Initializable {
             alert.showAndWait();
         }
         else {
+            double toppingCost = 0;
+            String stringToppingCost = "";
             Pizza pizza = new Pizza (size.getValue().toString(), type.getValue().toString());
             if(size.getValue().toString().equals("Small +$4.00")){
                 pizza.incrementItemPrice(4);
+                toppingCost = 0.50;
+                stringToppingCost = java.lang.String.format("%.2f", toppingCost);
             }
             if(size.getValue().toString().equals("Medium +$6.00")){
                 pizza.incrementItemPrice(6);
+                toppingCost = 0.75;
+                stringToppingCost = java.lang.String.format("%.2f", toppingCost);
             }
             if(size.getValue().toString().equals("Large +$8.00")){
                 pizza.incrementItemPrice(8);
+                toppingCost = 1.00;
+                stringToppingCost = java.lang.String.format("%.2f", toppingCost);
             }
             if(size.getValue().toString().equals("Extra Large +$10.00")){
                 pizza.incrementItemPrice(10);
+                toppingCost = 1.25;
+                stringToppingCost = java.lang.String.format("%.2f", toppingCost);
             }
             if (pepperoni.isSelected()) {
-                if (pizza.getToppings().size() > 1){
-                    pizza.addTopping("Pepperoni +$0.25");
-                } else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Pepperoni +$0.50");
+                if (pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Pepperoni +$" + stringToppingCost);
                 }else {
                     pizza.addTopping("Pepperoni");
                 }
             }
             if (sausage.isSelected()){
-                if (pizza.getToppings().size() > 1){
-                    pizza.addTopping("Sausage +$0.25");
-                } else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Sausage +$0.50");
-                }else {
+                if (pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Sausage +$" + stringToppingCost);
+                } else {
                     pizza.addTopping("Sausage");
                 }
             }
             if (ham.isSelected()){
-                if (pizza.getToppings().size() > 1){
-                    pizza.addTopping("Ham +$0.25");
-                } else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Ham +$0.50");
-                }else {
+                if (pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Ham +$" + stringToppingCost);
+                } else {
                     pizza.addTopping("Ham");
                 }
             }
             if (extraCheese.isSelected()){
-                if ( pizza.getToppings().size() > 1){
-                    pizza.addTopping("Extra Cheese +$0.25");
-                } else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Extra Cheese +$0.50");
-                }else {
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Extra Cheese +$" + stringToppingCost);
+                } else {
                     pizza.addTopping("Extra Cheese");
                 }
             }
             if (greenPeppers.isSelected()){
-                if ( pizza.getToppings().size() > 1){
-                    pizza.addTopping("Green Peppers +$0.25");
-                } else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Green Peppers +$0.50");
-                }else {
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Green Peppers +$" + stringToppingCost);
+                } else {
                     pizza.addTopping("Green Peppers");
                 }
             }
             if (pineapple.isSelected()){
-                if ( pizza.getToppings().size() > 1){
-                    pizza.addTopping("Pineapple +$0.25");
-                }else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Pineapple +$0.50");
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Pineapple +$" + stringToppingCost);
                 } else {
                     pizza.addTopping("Pineapple");
                 }
             }
             if (onion.isSelected()){
-                if ( pizza.getToppings().size() > 1){
-                    pizza.addTopping("Onion +$0.25");
-                } else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Onion +$0.50");
-                }else {
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Onion +$" + stringToppingCost);
+                } else {
                     pizza.addTopping("Onion");
                 }
             }
             if (tomato.isSelected()){
-                if ( pizza.getToppings().size() > 1){
-                    pizza.addTopping("Tomato +$0.25");
-                } else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Tomato +$0.50");
-                }else {
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Tomato +$" + stringToppingCost);
+                } else {
                     pizza.addTopping("Tomato");
                 }
             }
             if (mushrooms.isSelected()){
-                if ( pizza.getToppings().size() > 1){
-                    pizza.addTopping("Mushrooms +$0.25");
-                } else if (pizza.getToppings().size() == 1){
-                    pizza.addTopping("Mushrooms +$0.50");
-                }else {
+                if ( pizza.getToppings().size() >= 1){
+                    pizza.addTopping("Mushrooms +$" + stringToppingCost);
+                } else {
                     pizza.addTopping("Mushrooms");
                 }
             }
             double toppingPrice = 0.0;
-            if ( pizza.getToppings().size() > 1){
-                toppingPrice = .25 * pizza.getToppings().size();
+            System.out.println("Toppings length: " + pizza.getToppings().size());
+            if (pizza.getToppings().size() > 1){
+                toppingPrice = toppingCost * (pizza.getToppings().size() - 1);
             }
             pizza.incrementItemPrice(toppingPrice);
             pizza.setItemStringPrice(pizza.getItemPrice());
             orderTable.getItems().add(pizza);
+            toppingCost = 0;
         }
         resetTotals();
     }
@@ -580,6 +590,20 @@ public class CheckoutController implements Initializable {
         return calculateSubtotal() + calculateTax();
     }
 
+    @FXML
+    private void showToppingPrices(ActionEvent event) throws IOException {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("toppingPrices.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Topping Prices");
+            stage.setScene(new Scene(root, 375, 200));
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     private AnchorPane p1;
@@ -606,6 +630,10 @@ public class CheckoutController implements Initializable {
     @FXML
     private VBox buttonBox;
 
+    @FXML
+    private AnchorPane checkoutPane;
+
+
 
     /**
      * Changes GUI to 'Order Confirmation Prompt' page
@@ -629,7 +657,7 @@ public class CheckoutController implements Initializable {
         proceedButton.setVisible(true);
         returnButton.setVisible(true);
         orderText.setVisible(true);
-        orderLine.setVisible(true);
+        orderLine.setVisible(true);*/
 
     }
 
