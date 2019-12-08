@@ -595,6 +595,7 @@ public class CheckoutController implements Initializable {
             viewToppingPrices.setDisable(true);
             Parent root = FXMLLoader.load(getClass().getResource("toppingPrices.fxml"));
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Topping Prices");
             stage.setScene(new Scene(root, 375, 200));
             stage.showAndWait();
