@@ -630,37 +630,15 @@ public class CheckoutController implements Initializable {
     @FXML
     private VBox buttonBox;
 
-    @FXML
-    private AnchorPane checkoutPane;
-
-
 
     /**
      * Changes GUI to 'Order Confirmation Prompt' page
-     * @param event
+     * @param e
      */
     @FXML
-    private void orderSummary(ActionEvent event) throws IOException {
-        try {
-            Stage checkoutStage = (Stage) checkoutPane.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("confirmationTable.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Confirm Order");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(checkoutStage);
-            Scene scene = new Scene(root, 750, 500);
-            scene.getStylesheets().add("styles.css");
-            stage.setScene(scene);
-            stage.showAndWait();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-/*        Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        s.setWidth(530);
-        s.centerOnScreen();
-        tablePane.setLayoutX(45);
+    private void orderSummary(ActionEvent e) throws IOException {
+        Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        tablePane.setLayoutX(280);
         buttonBox.setLayoutX(15);
 
         p1.setVisible(false);
@@ -673,7 +651,7 @@ public class CheckoutController implements Initializable {
         proceedButton.setVisible(true);
         returnButton.setVisible(true);
         orderText.setVisible(true);
-        orderLine.setVisible(true);*/
+        orderLine.setVisible(true);
 
     }
 
@@ -684,9 +662,7 @@ public class CheckoutController implements Initializable {
     @FXML
     private void returnToOrder(ActionEvent e){
         Stage s = (Stage) ( (Node) e.getSource()).getScene().getWindow();
-        s.setWidth(1000);
-        s.centerOnScreen();
-        tablePane.setLayoutX(500);
+        tablePane.setLayoutX(529);
         buttonBox.setLayoutX(200);
 
         p1.setVisible(true);
@@ -712,8 +688,6 @@ public class CheckoutController implements Initializable {
     private void confirmOrder(ActionEvent e) throws IOException {
         Stage s = (Stage) ( (Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("confirmation.fxml")));
-        s.setWidth(1000);
-        s.centerOnScreen();
         s.setScene(scene);
         s.show();
     }
