@@ -21,13 +21,16 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("check_out_page.fxml"));
         primaryStage.setTitle("Mom & Pop's Pizza");
         Scene scene = new Scene(root, 1000, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        primaryStage.setOnCloseRequest(e -> Platform.exit());
+        primaryStage.setOnCloseRequest(e ->{
+            Platform.exit();
+            System.exit(0);
+        });
 
     }
 
