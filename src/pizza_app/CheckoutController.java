@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -476,7 +479,6 @@ public class CheckoutController implements Initializable {
                 }
             }
             double toppingPrice = 0.0;
-            System.out.println("Toppings length: " + pizza.getToppings().size());
             if (pizza.getToppings().size() > 1){
                 toppingPrice = toppingCost * (pizza.getToppings().size() - 1);
             }
