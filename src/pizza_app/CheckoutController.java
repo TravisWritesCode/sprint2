@@ -636,7 +636,7 @@ public class CheckoutController implements Initializable {
      * @param e
      */
     @FXML
-    private void orderSummary(ActionEvent e) throws IOException {
+    private void orderSummary(ActionEvent e){
         Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
         tablePane.setLayoutX(280);
         buttonBox.setLayoutX(15);
