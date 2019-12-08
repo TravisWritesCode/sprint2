@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="200.0" maxWidth="375.0" minHeight="200.0" minWidth="375.0" prefHeight="200.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizza_app.ToppingPricesController">
+   <children>
+      <GridPane layoutX="13.0" layoutY="119.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Small:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medium:" GridPane.columnIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Large:" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Large:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.50/ each" GridPane.columnIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$1.00/ each" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$0.75/ each" GridPane.columnIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$1.25/ each" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Line endX="41.375" endY="0.0234375" layoutX="128.0" layoutY="46.0" startX="-114.0" startY="0.0234375" stroke="#a84040" strokeWidth="2.0" />
+      <Text layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Topping Prices">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="13.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The first topping is free!" wrappingWidth="170.43798828125" />
+      <Text layoutX="13.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prices for additional toppings are as follows:" wrappingWidth="297.43798828125" />
+   </children>
+</AnchorPane>
