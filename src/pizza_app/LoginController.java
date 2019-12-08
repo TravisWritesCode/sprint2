@@ -180,7 +180,7 @@ public class LoginController {
      *     phone number
      *     password
      * </ul></li>
-     * If either inputted values are invalid, cooresponding error messages will appear and prompt the user to correct their mistake
+     * If either inputted values are invalid, corresponding error messages will appear and prompt the user to correct their mistake
      *  </p>
      * @param e
      * @throws Exception
@@ -195,12 +195,12 @@ public class LoginController {
                 alert.setContentText("Please try again.");
                 alert.showAndWait();
             } else if (verifyLogin(phoneField.getText(), passwordField.getText())) {
-                Stage stage = (Stage) root.getScene().getWindow();
+                Stage checkoutStage = (Stage) root.getScene().getWindow();
                 Parent checkOut = FXMLLoader.load(getClass().getResource("check_out_page.fxml"));
                 Scene scene = new Scene(checkOut);
                 scene.getStylesheets().add("styles.css");
-                stage.setScene(scene);
-                stage.show();
+                checkoutStage.setScene(scene);
+                checkoutStage.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Login Failed");

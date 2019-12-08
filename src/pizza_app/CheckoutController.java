@@ -637,11 +637,27 @@ public class CheckoutController implements Initializable {
 
     /**
      * Changes GUI to 'Order Confirmation Prompt' page
-     * @param e
+     * @param event
      */
     @FXML
-    private void orderSummary(ActionEvent e) throws IOException {
-        Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
+    private void orderSummary(ActionEvent event) throws IOException {
+        try {
+            Stage checkoutStage = (Stage) checkoutPane.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("confirmationTable.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Confirm Order");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(checkoutStage);
+            Scene scene = new Scene(root, 750, 500);
+            scene.getStylesheets().add("styles.css");
+            stage.setScene(scene);
+            stage.showAndWait();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+/*        Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
         s.setWidth(530);
         s.centerOnScreen();
         tablePane.setLayoutX(45);
