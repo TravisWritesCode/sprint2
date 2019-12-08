@@ -13,6 +13,7 @@ import javafx.stage.Stage;
  * This is the main class which includes the overriden start function and the main function which will launch the application
  */
 public class Main extends Application {
+
     /**
      * Ovveriden start method which assigns the title and root for our application to be
      * the home.fxml file
@@ -26,6 +27,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, 1000, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
     /**
@@ -35,5 +37,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

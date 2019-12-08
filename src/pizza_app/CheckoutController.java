@@ -5,9 +5,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -32,7 +41,7 @@ import java.util.ResourceBundle;
 public class CheckoutController implements Initializable {
 
     @FXML
-    private TableView<MenuItem> orderTable;
+    protected TableView<MenuItem> orderTable;
 
     @FXML
     private TableColumn<MenuItem, String> itemColumn;
@@ -214,7 +223,7 @@ public class CheckoutController implements Initializable {
      * @return ObservableList of type MenuItem
      */
     // this method returns all of the items in the order
-    ObservableList<MenuItem> getItemList(){
+    private ObservableList<MenuItem> getItemList(){
         ObservableList<MenuItem> menuItems = FXCollections.observableArrayList();
         return menuItems;
     }
@@ -234,7 +243,8 @@ public class CheckoutController implements Initializable {
      * @param e
      */
     // adds item to order
-    public void addSide(ActionEvent e) {
+    @FXML
+    private void addSide(ActionEvent e) {
         if ( !breadsticks.isSelected() && !breadstickBites.isSelected() && !cookie.isSelected()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Oops. Invalid Entry.");
@@ -281,7 +291,8 @@ public class CheckoutController implements Initializable {
      * @param e
      */
     // adds item to order
-    public void addDrink(ActionEvent e) {
+    @FXML
+    private void addDrink(ActionEvent e) {
         if (flavors.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Oops. Invalid Entry.");
@@ -347,7 +358,8 @@ public class CheckoutController implements Initializable {
      * </p>
      */
     // adds pizza to order
-    public void addPizza() {
+    @FXML
+    private void addPizza() {
         if (size.getValue() == null|| type.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Oops. Invalid Entry.");
@@ -433,11 +445,11 @@ public class CheckoutController implements Initializable {
                 }
             }
             if (tomato.isSelected()){
-               if ( pizza.getToppings().size() > 1){
+                if ( pizza.getToppings().size() > 1){
                     pizza.addTopping("Tomato +$0.25");
                 } else if (pizza.getToppings().size() == 1){
-                   pizza.addTopping("Tomato +$0.50");
-               }else {
+                    pizza.addTopping("Tomato +$0.50");
+                }else {
                     pizza.addTopping("Tomato");
                 }
             }
@@ -466,7 +478,8 @@ public class CheckoutController implements Initializable {
      *  else keeps the delivery fee section to 0.0
      * @param e
      */
-    public void setIsDelivery(ActionEvent e){
+    @FXML
+    private void setIsDelivery(ActionEvent e){
         if (delivery.isSelected()){
             fee.setText("$"+ java.lang.String.format("%.2f", 2.5));
             resetTotals();
@@ -519,7 +532,7 @@ public class CheckoutController implements Initializable {
      *     total (subtotal + tax)
      * </ul></li>
      */
-    public void resetTotals(){
+    private void resetTotals(){
         double mySubtotal =calculateSubtotal();
         subtotal.setText("$"+ java.lang.String.format("%.2f", mySubtotal));
         tax.setText("$"+ java.lang.String.format("%.2f", calculateTax()));
@@ -559,8 +572,28 @@ public class CheckoutController implements Initializable {
      * @return total
      */
     private double calculateTotal(){
-         return calculateSubtotal() + calculateTax();
+        return calculateSubtotal() + calculateTax();
     }
+
+
+    /**
+     * When called, will disable main window and open a pop-up confirmation window
+     * @param e
+     */
+    //opens popup confirmation window
+    @FXML
+    private void orderSummary(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("confirmationPrompt.fxml"));
+        Stage s = new Stage(StageStyle.UNDECORATED); //removes frame
+        s.initOwner((((Node) e.getSource()).getScene().getWindow())); //sets original windows as owner
+        s.initModality(Modality.APPLICATION_MODAL); //disables background
+        Scene scene = new Scene(root, 530, 227);
+        s.setScene(scene);
+        s.showAndWait();
+
+    }
+
+
 
 
 }
