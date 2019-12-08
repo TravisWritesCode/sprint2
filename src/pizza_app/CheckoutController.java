@@ -17,10 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -595,17 +592,18 @@ public class CheckoutController implements Initializable {
     @FXML
     private void showToppingPrices(ActionEvent event) throws IOException {
         try {
+            viewToppingPrices.setDisable(true);
             Parent root = FXMLLoader.load(getClass().getResource("toppingPrices.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Topping Prices");
             stage.setScene(new Scene(root, 375, 200));
-            stage.show();
+            stage.showAndWait();
+            viewToppingPrices.setDisable(false);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private AnchorPane p1;
