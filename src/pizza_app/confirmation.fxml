@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizza_app.CompletionController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizza_app.LoginController">
     <children>
         <ImageView fitHeight="769.0" fitWidth="1138.0" layoutX="-17.0" layoutY="-120.0">
             <image>
@@ -17,7 +17,7 @@
         </ImageView>
         <AnchorPane layoutX="101.0" layoutY="45.0" prefHeight="520.0" prefWidth="849.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
             <children>
-                <JFXButton layoutX="290.0" layoutY="406.0" onAction="#returnToHome" prefHeight="41.0" prefWidth="269.0" style="-fx-background-color: #5CB85B;" text="Logout and Return to Home" textFill="WHITE">
+                <JFXButton layoutX="290.0" layoutY="406.0" onAction="#changeToHome" prefHeight="41.0" prefWidth="269.0" style="-fx-background-color: #5CB85B;" text="Logout and Return to Home" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>

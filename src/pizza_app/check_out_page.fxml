@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -28,7 +29,7 @@
             <Image url="@images/pizza2.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="63.0" layoutY="37.0" maxHeight="255.0" maxWidth="415.0" minHeight="247.0" minWidth="415.0" prefHeight="247.0" prefWidth="415.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
+      <AnchorPane fx:id="p1" layoutX="63.0" layoutY="37.0" maxHeight="255.0" maxWidth="415.0" minHeight="247.0" minWidth="415.0" prefHeight="247.0" prefWidth="415.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
          <children>
             <JFXButton layoutX="219.0" layoutY="213.0" onAction="#addPizza" prefHeight="25.0" prefWidth="169.0" style="-fx-background-color: #5CB85B;" text="Add Pizza" textFill="WHITE" />
             <Text layoutX="23.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Build Your Pizza">
@@ -97,7 +98,7 @@
             <Text layoutX="28.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*First topping is free." />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="500.0" layoutY="35.0" prefHeight="520.0" prefWidth="440.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
+      <AnchorPane fx:id="tablePane" layoutX="500.0" layoutY="35.0" prefHeight="520.0" prefWidth="440.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
          <children>
             <TableView fx:id="orderTable" layoutX="15.0" layoutY="13.0" maxWidth="405.0" prefHeight="289.0" prefWidth="405.0">
               <columns>
@@ -105,7 +106,7 @@
                 <TableColumn fx:id="priceColumn" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" sortable="false" text="Price" />
               </columns>
             </TableView>
-            <JFXButton layoutX="15.0" layoutY="311.0" onAction="#removeItem" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #a84040;" text="Remove Selected Item" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+            <JFXButton fx:id="removeButton" layoutX="15.0" layoutY="311.0" onAction="#removeItem" prefHeight="27.0" prefWidth="183.0" style="-fx-background-color: #a84040;" text="Remove Selected Item" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
             <JFXButton fx:id="submitOrder" layoutX="15.0" layoutY="467.0" onAction="#orderSummary" prefHeight="38.0" prefWidth="405.0" style="-fx-background-color: #5CB85B;" text="Place Order" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -122,7 +123,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="18.0" prefWidth="69.0" text="Delivery Fee:" textAlignment="RIGHT" />
+                  <Label prefHeight="18.0" prefWidth="81.0" text="Delivery Fee:" textAlignment="RIGHT" />
                   <Label text="Tax (8.9%):" textAlignment="RIGHT" GridPane.rowIndex="2" />
                   <JFXTextField fx:id="fee" focusColor="#4d4d4d" maxWidth="100.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
                   <JFXTextField fx:id="tax" focusColor="#4d4d4d" maxWidth="100.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -136,7 +137,7 @@
                   </JFXTextField>
                </children>
             </GridPane>
-            <AnchorPane layoutX="15.0" layoutY="346.0" prefHeight="96.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 5px;">
+            <AnchorPane fx:id="deliveryPane" layoutX="15.0" layoutY="346.0" prefHeight="96.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 5px;">
                <children>
                   <JFXRadioButton fx:id="delivery" layoutX="92.0" layoutY="56.0" onAction="#setIsDelivery" text="Delivery">
                      <toggleGroup>
@@ -151,9 +152,29 @@
                   </Text>
                </children>
             </AnchorPane>
+            <Text fx:id="orderText" fill="#ef3c38" layoutX="43.0" layoutY="489.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="2.0" text="You are about to place your order " visible="false">
+               <font>
+                  <Font name="SansSerif Regular" size="23.0" />
+               </font>
+            </Text>
+            <Line fx:id="orderLine" endX="104.0" layoutX="267.0" layoutY="502.0" startX="-204.0" visible="false" />
+            <VBox fx:id="buttonBox" layoutX="200.0" layoutY="346.0" prefHeight="80.0" prefWidth="183.0" spacing="10.0">
+               <children>
+                  <JFXButton fx:id="proceedButton" onAction="#confirmOrder" prefHeight="38.0" prefWidth="183.0" style="-fx-background-color: #5CB85B;" text="Proceed" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="returnButton" onAction="#returnToOrder" prefHeight="38.0" prefWidth="183.0" style="-fx-background-color: #5CB85B;" text="Return" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="63.0" layoutY="300.0" maxHeight="255.0" maxWidth="200.0" minHeight="255.0" minWidth="200.0" prefHeight="255.0" prefWidth="200.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
+      <AnchorPane fx:id="p2" layoutX="63.0" layoutY="300.0" maxHeight="255.0" maxWidth="200.0" minHeight="255.0" minWidth="200.0" prefHeight="255.0" prefWidth="200.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
          <children>
             <JFXButton layoutX="11.0" layoutY="216.0" onAction="#addSide" prefHeight="25.0" prefWidth="169.0" style="-fx-background-color: #5CB85B;" text="Add Sides" textFill="WHITE" />
             <Text layoutX="23.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Sides">
@@ -189,8 +210,7 @@
             <Text layoutX="14.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Hover over sides for prices." />
          </children>
       </AnchorPane>
-      <JFXComboBox fx:id="size1" focusColor="#a84040" layoutX="363.0" layoutY="380.0" prefHeight="25.0" prefWidth="105.0" promptText="Flavor" />
-      <AnchorPane layoutX="278.0" layoutY="300.0" maxHeight="255.0" maxWidth="200.0" minHeight="255.0" minWidth="200.0" prefHeight="255.0" prefWidth="200.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
+      <AnchorPane fx:id="p3" layoutX="278.0" layoutY="300.0" maxHeight="255.0" maxWidth="200.0" minHeight="255.0" minWidth="200.0" prefHeight="255.0" prefWidth="200.0" style="-fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-background-color: white;">
          <children>
             <Text layoutX="23.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Drinks">
                <font>

@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +13,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -60,9 +68,6 @@ public class CheckoutController implements Initializable {
 
     @FXML
     private TableColumn<String, String> totalColumn;
-
-    @FXML
-    private JFXButton submitOrder;
 
     @FXML
     private JFXTextField subtotal;
@@ -576,24 +581,97 @@ public class CheckoutController implements Initializable {
     }
 
 
+    @FXML
+    private AnchorPane p1;
+    @FXML
+    private AnchorPane p2;
+    @FXML
+    private AnchorPane p3;
+    @FXML
+    private AnchorPane tablePane;
+    @FXML
+    private JFXButton removeButton;
+    @FXML
+    private AnchorPane deliveryPane;
+    @FXML
+    private JFXButton submitOrder;
+    @FXML
+    private JFXButton proceedButton;
+    @FXML
+    private JFXButton returnButton;
+    @FXML
+    private Text orderText;
+    @FXML
+    private Line orderLine;
+    @FXML
+    private VBox buttonBox;
+
+
     /**
-     * When called, will disable main window and open a pop-up confirmation window
+     * Changes GUI to 'Order Confirmation Prompt' page
      * @param e
      */
-    //opens popup confirmation window
     @FXML
     private void orderSummary(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("confirmationPrompt.fxml"));
-        Stage s = new Stage(StageStyle.UNDECORATED); //removes frame
-        s.initOwner((((Node) e.getSource()).getScene().getWindow())); //sets original windows as owner
-        s.initModality(Modality.APPLICATION_MODAL); //disables background
-        Scene scene = new Scene(root, 530, 227);
-        s.setScene(scene);
-        s.showAndWait();
+        Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        s.setWidth(530);
+        s.centerOnScreen();
+        tablePane.setLayoutX(45);
+        buttonBox.setLayoutX(15);
+
+        p1.setVisible(false);
+        p2.setVisible(false);
+        p3.setVisible(false);
+        removeButton.setVisible(false);
+        submitOrder.setVisible(false);
+        deliveryPane.setVisible(false);
+
+        proceedButton.setVisible(true);
+        returnButton.setVisible(true);
+        orderText.setVisible(true);
+        orderLine.setVisible(true);
 
     }
 
+    /**
+     * Changes GUI back to 'Checkout/Pizza Builder' page
+     * @param e
+     */
+    @FXML
+    private void returnToOrder(ActionEvent e){
+        Stage s = (Stage) ( (Node) e.getSource()).getScene().getWindow();
+        s.setWidth(1000);
+        s.centerOnScreen();
+        tablePane.setLayoutX(500);
+        buttonBox.setLayoutX(200);
 
+        p1.setVisible(true);
+        p2.setVisible(true);
+        p3.setVisible(true);
+        removeButton.setVisible(true);
+        submitOrder.setVisible(true);
+        deliveryPane.setVisible(true);
 
+        proceedButton.setVisible(false);
+        returnButton.setVisible(false);
+        orderText.setVisible(false);
+        orderLine.setVisible(false);
+    }
+
+    /**
+     * Changes GUI to 'Order Placed'
+     * @param e
+     * @throws IOException
+     */
+    //proceeds to order confirmation
+    @FXML
+    private void confirmOrder(ActionEvent e) throws IOException {
+        Stage s = (Stage) ( (Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("confirmation.fxml")));
+        s.setWidth(1000);
+        s.centerOnScreen();
+        s.setScene(scene);
+        s.show();
+    }
 
 }
