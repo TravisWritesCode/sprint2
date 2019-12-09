@@ -589,6 +589,12 @@ public class CheckoutController implements Initializable {
         return calculateSubtotal() + calculateTax();
     }
 
+
+    /**
+     * When called, a stage is opened which displays the pizza topping prices.
+     * Atlanta's current food tax, 8.9%
+     * @param event
+     */
     @FXML
     private void showToppingPrices(ActionEvent event) throws IOException {
         try {
