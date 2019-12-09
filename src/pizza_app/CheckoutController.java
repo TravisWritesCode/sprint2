@@ -391,100 +391,138 @@ public class CheckoutController implements Initializable {
         else {
             double toppingCost = 0;
             String stringToppingCost = "";
-            Pizza pizza = new Pizza (size.getValue().toString(), type.getValue().toString());
-            if(size.getValue().toString().equals("Small +$4.00")){
+            Pizza pizza = new Pizza(size.getValue().toString(), type.getValue().toString());
+            if (size.getValue().toString().equals("Small +$4.00")) {
                 pizza.incrementItemPrice(4);
                 toppingCost = 0.50;
                 stringToppingCost = java.lang.String.format("%.2f", toppingCost);
             }
-            if(size.getValue().toString().equals("Medium +$6.00")){
+            if (size.getValue().toString().equals("Medium +$6.00")) {
                 pizza.incrementItemPrice(6);
                 toppingCost = 0.75;
                 stringToppingCost = java.lang.String.format("%.2f", toppingCost);
             }
-            if(size.getValue().toString().equals("Large +$8.00")){
+            if (size.getValue().toString().equals("Large +$8.00")) {
                 pizza.incrementItemPrice(8);
                 toppingCost = 1.00;
                 stringToppingCost = java.lang.String.format("%.2f", toppingCost);
             }
-            if(size.getValue().toString().equals("Extra Large +$10.00")){
+            if (size.getValue().toString().equals("Extra Large +$10.00")) {
                 pizza.incrementItemPrice(10);
                 toppingCost = 1.25;
                 stringToppingCost = java.lang.String.format("%.2f", toppingCost);
             }
+
+            int toppingsSelected = 0;
             if (pepperoni.isSelected()) {
-                if (pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Pepperoni +$" + stringToppingCost);
-                }else {
-                    pizza.addTopping("Pepperoni");
+                toppingsSelected++;
+            }
+            if (sausage.isSelected()) {
+                toppingsSelected++;
+            }
+            if (ham.isSelected()) {
+                toppingsSelected++;
+            }
+            if (extraCheese.isSelected()) {
+                toppingsSelected++;
+            }
+            if (greenPeppers.isSelected()) {
+                toppingsSelected++;
+            }
+            if (pineapple.isSelected()) {
+                toppingsSelected++;
+            }
+            if (onion.isSelected()) {
+                toppingsSelected++;
+            }
+            if (tomato.isSelected()) {
+                toppingsSelected++;
+            }
+            if (mushrooms.isSelected()) {
+                toppingsSelected++;
+            }
+
+            if (toppingsSelected > 4) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Too many toppings");
+                alert.setHeaderText("You can only add up to four toppings on your pizza.");
+                alert.setContentText("Remove toppings and try again.");
+                alert.showAndWait();
+            } else {
+                if (pepperoni.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Pepperoni +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Pepperoni");
+                    }
                 }
-            }
-            if (sausage.isSelected()){
-                if (pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Sausage +$" + stringToppingCost);
-                } else {
-                    pizza.addTopping("Sausage");
+                if (sausage.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Sausage +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Sausage");
+                    }
                 }
-            }
-            if (ham.isSelected()){
-                if (pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Ham +$" + stringToppingCost);
-                } else {
-                    pizza.addTopping("Ham");
+                if (ham.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Ham +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Ham");
+                    }
                 }
-            }
-            if (extraCheese.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Extra Cheese +$" + stringToppingCost);
-                } else {
-                    pizza.addTopping("Extra Cheese");
+                if (extraCheese.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Extra Cheese +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Extra Cheese");
+                    }
                 }
-            }
-            if (greenPeppers.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Green Peppers +$" + stringToppingCost);
-                } else {
-                    pizza.addTopping("Green Peppers");
+                if (greenPeppers.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Green Peppers +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Green Peppers");
+                    }
                 }
-            }
-            if (pineapple.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Pineapple +$" + stringToppingCost);
-                } else {
-                    pizza.addTopping("Pineapple");
+                if (pineapple.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Pineapple +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Pineapple");
+                    }
                 }
-            }
-            if (onion.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Onion +$" + stringToppingCost);
-                } else {
-                    pizza.addTopping("Onion");
+                if (onion.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Onion +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Onion");
+                    }
                 }
-            }
-            if (tomato.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Tomato +$" + stringToppingCost);
-                } else {
-                    pizza.addTopping("Tomato");
+                if (tomato.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Tomato +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Tomato");
+                    }
                 }
-            }
-            if (mushrooms.isSelected()){
-                if ( pizza.getToppings().size() >= 1){
-                    pizza.addTopping("Mushrooms +$" + stringToppingCost);
-                } else {
-                    pizza.addTopping("Mushrooms");
+                if (mushrooms.isSelected()) {
+                    if (pizza.getToppings().size() >= 1) {
+                        pizza.addTopping("Mushrooms +$" + stringToppingCost);
+                    } else {
+                        pizza.addTopping("Mushrooms");
+                    }
                 }
+                double toppingPrice = 0.0;
+                if (pizza.getToppings().size() > 1) {
+                    toppingPrice = toppingCost * (pizza.getToppings().size() - 1);
+                }
+                pizza.incrementItemPrice(toppingPrice);
+                pizza.setItemStringPrice(pizza.getItemPrice());
+                orderTable.getItems().add(pizza);
+                toppingCost = 0;
+                resetTotals();
             }
-            double toppingPrice = 0.0;
-            if (pizza.getToppings().size() > 1){
-                toppingPrice = toppingCost * (pizza.getToppings().size() - 1);
-            }
-            pizza.incrementItemPrice(toppingPrice);
-            pizza.setItemStringPrice(pizza.getItemPrice());
-            orderTable.getItems().add(pizza);
-            toppingCost = 0;
         }
-        resetTotals();
     }
 
     /**
